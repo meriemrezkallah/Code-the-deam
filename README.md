@@ -38,7 +38,7 @@ Here is an example: </br>
 </br>![films5](https://user-images.githubusercontent.com/83052170/145486190-32803407-a3d9-48a4-b8b8-bee72646a7cd.png)</br>
 
  ### <p align="center"> **************************************************** </p>
-</br>I used Inline and External Styling.</br>
+</br>I used **Inline** and **External** Styling.</br>
 For the People page I used **internal** javascript by using **script** tag, and in Films I used **external** file and call it by using **link** tag
 This Webpage is developed using **HTML5**,**CSS3** , **JavaScript/ES6** and **BootStrap 4**</br>
 **Tools used**: Visual Studio Code</br>
