@@ -26,16 +26,17 @@
               <p id="birth_year" class="card-text">-------------</p>
               <h6  class="card-title" style="text-decoration:underLine">Films:</h6>
             
-              <!-- Buttons -->
-<div id="buttons" class="text-center mb-5">
-  <div id="item" class="btn-group btn-group-toggle pt-5" data-toggle="buttons">
-   <!-- <div id="item" > </div>-->
-      
-  </div>
-</div>
-              <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+                                  <!-- Buttons -->
+                    <div id="buttons" class="text-center mb-5">
+                      <div id="item" class="btn-group btn-group-toggle pt-5" data-toggle="buttons">
+                      <!-- <div id="item" > </div>-->
+                          
+                      </div>
+                    </div>
+            <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
             </div>
             <button id="button" type="button" class="btn btn-primary btn-lg"> Next </button>
+            <button  onclick="location.href = './index.html'" class="btn btn-secondary btn-lg"> Back to the home page </button>
           </div>
           
     
@@ -43,32 +44,35 @@
 
 
     <script>
+      // declaration of variable needed 
         let button = document.querySelector('#button')
         let buttons = document.querySelector('#buttons')
         let name = document.querySelector('#name')
         let gender = document.querySelector('#gender')
         let birth_year = document.querySelector('#birth_year')
         let loading = document.querySelector('#loading')
-        //let randomnum = Math.floor((Math.random()*82))
-       // const results= document.querySelector('#results');
         const item=document.querySelector('#item');
-       // const api_url = 'https://swapi.dev/api/people/'+randomnum;
         
         
-        
+       //main where to start the program 
         async function getPeople(){
           generateDataLoading();
-          let randomnum = Math.floor((Math.random()*82));
+          //there is 82 people but u choosed higher number to hunder errors
+          let randomnum = Math.floor((Math.random()*86+1));
           const api_url = 'https://swapi.dev/api/people/'+randomnum;
         const response= await fetch(api_url);
         const data = await response.json();
-      //  document.getElementById('Name').textContent = data.name;
-      generateData(data);
-       // document.getElementById('test').textContent = data.gender;
-        fetchAll(data.films);
-        //console.log(data.films)
+        if(response.ok){
+                    //  document.getElementById('Name').textContent = data.name;
+                    generateData(data);
+                    // document.getElementById('test').textContent = data.gender;
+                      fetchAll(data.films);
+                      //console.log(data.films)
+        }if(!response.ok){
+              generateDataFail();
+        }
        }
-       
+    //get information about  the films   
        async function moreInfo(value){
         const response= await fetch("https://swapi.dev/api/films/");
         const data = await response.json();
@@ -85,17 +89,17 @@
         }
          ) }
 
-
+    // generate data
        function generateData(data) {
         loading.innerHTML =''
-         name.innerText = data.name
+        name.innerText = data.name
         gender.innerText = data.gender
         birth_year.innerText = data.birth_year
  
     }
 
 
-      //to return the films titles 
+   //to return the films titles 
        const fetchAll = async (urls) => {
         let output = "";
         const res = await Promise.all(urls.map(u => fetch(u)))
@@ -112,13 +116,21 @@
   })
   item.innerHTML = output;
 }
-
+//loading data
 function generateDataLoading() {
   loading.innerHTML='<img src="./loading-buffering.gif" width="50" height="50">'
     name.innerHTML = ''
     gender.innerText = ''
     birth_year.innerText =''
     item.innerHTML= '<img src="./loading-buffering.gif" width="50" height="50">'
+}
+// to handle errors
+function generateDataFail() {
+    loading.innerText = 'Error'
+    name.innerText = ''
+    gender.innerText = ''
+    birth_year.innerText = ''
+    item.innerText = ''
 }
 button.addEventListener('click', getPeople);
 document.querySelector('#buttons').addEventListener('click', e => {

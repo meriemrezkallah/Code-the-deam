@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='./script1.js' async></script> 
+    <!-- bootstrap 4 css-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Star Wars API</title>
+</head>
+<body >
+ 
+        <div class="card text-center  w-75" style="opacity: 0.8;margin: auto;">
+            <div class="card-header">
+              <h1>Films</h1>
+              <div id="loading">  </div>
+            </div>
+            <div class="card-body">
+              <h6 class="card-title" style="text-decoration:underLine">Title:</h6>
+              <p id="title" class="card-text">-------------</p>
+              <h6 class="card-title" style="text-decoration:underLine" >Director:</h6>
+              <p id="director" class="card-text">-------------</p>
+              <h6  class="card-title" style="text-decoration:underLine" >Producer:</h6>
+              <p id="producer" class="card-text">-------------</p>
+              <h6  class="card-title" style="text-decoration:underLine" >Release Date:</h6>
+              <p id="release_date" class="card-text">-------------</p>
+              <h6  class="card-title" style="text-decoration:underLine">Characters:</h6>
+            
+                                  <!-- Buttons -->
+                    <div id="buttons" class="text-center mb-5">
+                      <div  class="btn-group btn-group-toggle pt-5 " data-toggle="buttons">
+                    <div id="item" > </div>
+                          
+                      </div>
+                    </div>
+              <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+            </div>
+            <button id="button" type="button" class="btn btn-primary btn-lg"> Next </button>
+            <button  onclick="location.href = './index.html'" class="btn btn-secondary btn-lg"> Back to the home page </button>
+          </div>
+         
+      
+       
+<!--
+
+    <script>
+      // declaration of variable needed 
+        let button = document.querySelector('#button')
+        let buttons = document.querySelector('#buttons')
+        let title = document.querySelector('#title')
+        let producer = document.querySelector('#producer')
+        let director = document.querySelector('#director')
+        let loading = document.querySelector('#loading')
+        let release_date = document.querySelector('#release_date')
+        const item=document.querySelector('#item');
+  
+        
+        
+       //main where to start the program 
+        async function getFilms(){
+          generateDataLoading();
+          let randomnum = Math.floor((Math.random()*6+1));
+          const api_url = 'https://swapi.dev/api/films/'+randomnum;
+        const response= await fetch(api_url);
+        const data = await response.json();
+        if(response.ok){
+      //  document.getElementById('Name').textContent = data.name;
+      generateData(data);
+       // document.getElementById('test').textContent = data.gender;
+        fetchAll(data.characters);
+        //console.log(data.films)
+      }if(!response.ok){
+        generateDataFail();
+      }
+       }
+    //get information about  the films   
+       async function moreInfo(value){
+        const response= await fetch("https://swapi.dev/api/people/");
+        const data = await response.json();
+        console.log(value)
+        data.results.forEach(item => {
+            if(item.name === value){
+            console.log(value)
+            window.alert(" Name: " + item.name + " | Gender: " + item.gender + " | Birth Year: " + item.birth_year + " | Skin Color: " + item.skin_color + " | Hair Color: " + item.hair_color);
+            }
+
+       // if (data.title === document.getElementById("buttons").innerText){
+      //      alert(" Title: " + data.title + " Producer: " + data.producer + " Release_date: " + data.release_date);
+      //  }
+        
+        }
+         ) }
+
+    // generate data
+       function generateData(data) {
+
+        loading.innerHTML =''
+        title.innerText = data.title
+        producer.innerText = data.producer
+        director.innerText = data.director
+        release_date.innerHTML = data.release_date
+ 
+    }
+
+
+   //to return the films titles 
+       const fetchAll = async (urls) => {
+        let output = "";
+        const res = await Promise.all(urls.map(u => fetch(u)))
+        const jsons = await Promise.all(res.map(r => r.json()))
+        console.log(jsons)
+        jsons.forEach(data=>{
+        console.log(data.name)
+       //return document.getElementById('item').textContent = data.title;
+        //const t = Promise.all(data.title)
+        // console.log(t)<a href="#" class="btn btn-primary"></a> onclick="moreInfo()"
+     return output+= `  <label  class="btn btn-primary ">
+          <input type="radio" name="options" autocomplete="off"> ${data.name} 
+      </label>`;
+  })
+  item.innerHTML = output;
+}
+
+//loading data
+function generateDataLoading() {
+  loading.innerHTML='<img src="./loading-buffering.gif" width="50" height="50">'
+  title.innerText = ''
+  producer.innerText = ''
+  director.innerText = ''
+  release_date.innerHTML = ''
+    item.innerHTML= '<img src="./loading-buffering.gif" width="50" height="50">'
+}
+// to handle errors
+function generateDataFail() {
+    loading.innerText = 'Error'
+    title.innerText = ''
+    director.innerText = ''
+    release_date.innerText = ''
+    producer.innerHTML=''
+    item.innerText = ''
+}
+button.addEventListener('click', getFilms);
+document.querySelector('#buttons').addEventListener('click', e => {
+moreInfo(e.target.textContent.trim());
+})
+    </script>-->
+<!-- Bootstrap JS-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
